@@ -8,4 +8,4 @@ app = FastAPI()
 
 @app.get("/")
 async def create_pokemon(pokemon: str):
-    return pk_types.type_categorize("Bulbasaur")
+    return pk_types.type_categorize(pokemon)
