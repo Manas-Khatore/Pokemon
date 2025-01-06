@@ -1,11 +1,21 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
+import matplotlib.pyplot as plt
 import pk_types
+import io
+from PIL import Image
 
 app = FastAPI()
 
-# print("hello")
-# print(pk_types.type_categorize("Bulbasaur"))
 
-@app.get("/")
+@app.get("/typegraph")
 async def create_pokemon(pokemon: str):
-    return pk_types.type_categorize(pokemon)
+    fig = pk_types.draw_type_relationship(pokemon)
+
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    buf.seek(0)
+
+    img = Image.open(buf)
+
+    return Response(content=buf.getvalue(), media_type="image/png")
+    # return pk_types.type_categorize(pokemon)
