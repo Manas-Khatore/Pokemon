@@ -1,12 +1,11 @@
-# from fastapi import FastAPI
-
+from fastapi import FastAPI
 import pk_types
 
-# app = FastAPI()
+app = FastAPI()
 
-print("hello")
-print(pk_types.type_categorize("Bulbasaur"))
+# print("hello")
+# print(pk_types.type_categorize("Bulbasaur"))
 
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello World"}
+@app.get("/")
+async def root():
+    return {"message": pk_types.type_categorize("Bulbasaur")}
