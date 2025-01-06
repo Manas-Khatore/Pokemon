@@ -18,4 +18,3 @@ async def create_pokemon(pokemon: str):
     img = Image.open(buf)
 
     return Response(content=buf.getvalue(), media_type="image/png")
-    # return pk_types.type_categorize(pokemon)
