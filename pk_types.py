@@ -93,3 +93,42 @@ def type_categorize(pokemon_name):
             del resistance_dict[t]
     
     return [weakness_dict, resistance_dict, immunity_dict, pok_types]
+
+def draw_type_relationship(pokemon_name):
+    dict_list = type_categorize(pokemon_name)
+    weaknesses = dict_list[0]
+    resistances = dict_list[1]
+    immunities = dict_list[2]
+    pok_types = dict_list[3]
+    
+    color_map = {pokemon_name: 'lightblue'}
+    graph_edge_list = []
+    
+    G = nx.DiGraph()
+    
+    for weak in weaknesses:
+        # print(weaknesses[weak])
+        graph_edge_list.append((pokemon_name, weak, weaknesses[weak] ** 2))
+        color_map[weak] = '#fd7a5e'
+    
+    for resis in resistances:
+        graph_edge_list.append((pokemon_name, resis, resistances[resis] ** 2))
+        color_map[resis] = '#5efd91'
+    
+    for immun in immunities:
+        graph_edge_list.append((pokemon_name, immun, immunities[immun] ** 2))
+        color_map[immun] = '#bdbdbd'
+    
+    G.add_weighted_edges_from(graph_edge_list)
+    node_colors = [color_map[node] for node in G.nodes]
+    weights = nx.get_edge_attributes(G, "weight")
+    edge_widths = [weight for (u, v, weight) in G.edges(data="weight")]
+    
+    fig = plt.figure()
+    nx.draw(G, with_labels=True, node_color=node_colors, node_size = 1500, width=edge_widths, ax=fig.add_subplot())
+
+    if len(pok_types) == 2:
+        plt.title(f"{pokemon_name} - {pok_types[0].capitalize()}/{pok_types[1].capitalize()}")
+    else:
+        plt.title(f"{pokemon_name} - {pok_types[0].capitalize()}")
+    return fig
