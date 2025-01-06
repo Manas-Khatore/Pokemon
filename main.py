@@ -6,6 +6,6 @@ app = FastAPI()
 # print("hello")
 # print(pk_types.type_categorize("Bulbasaur"))
 
-@app.post("/")
+@app.post("/items/")
 async def create_item(pokemon: str):
     return pokemon
