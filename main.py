@@ -1,8 +1,11 @@
-from fastapi import FastAPI
+# from fastapi import FastAPI
+import 
 
-app = FastAPI()
+# app = FastAPI()
 
+print("hello")
+print(type_categorize("Bulbasaur"))
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+# @app.get("/")
+# async def root():
+#     return {"message": "Hello World"}
