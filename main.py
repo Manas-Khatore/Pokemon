@@ -1,3 +1,6 @@
+# cd into directory where project is stored
+# run uvicorn main:app --reload in terminal to launch app
+
 from fastapi import FastAPI, Response
 import matplotlib.pyplot as plt
 import pk_types
@@ -5,7 +8,6 @@ import io
 from PIL import Image
 
 app = FastAPI()
-
 
 @app.get("/typegraph")
 async def create_pokemon(pokemon: str):
