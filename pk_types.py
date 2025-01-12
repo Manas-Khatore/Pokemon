@@ -132,3 +132,15 @@ def draw_type_relationship(pokemon_name):
     else:
         plt.title(f"{pokemon_name} - {pok_types[0].capitalize()}")
     return fig
+
+def team_categorize(pokemon_team):
+    ## TODO: pokemon_team is a list of pokemon
+    ## TODO: feed each pokemon into type_categorize function
+    ## TODO: tally the resistances and weaknesses of team
+    ## TODO: display biggest resistances/weaknesses and all pokemon associated with each
+    weaknesses_dict = {} # key: pokemon, value: list of weaknesses
+    resistances_dict = {}
+    immunities_dict = {}
+
+    for pok in pokemon_team:
+        cat_list = type_categorize(pok)
