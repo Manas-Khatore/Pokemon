@@ -147,11 +147,7 @@ def populate_dict(pokemon, weak_dict, resist_dict, immune_dict):
     return [weak_dict, resist_dict, immune_dict]
 
 def team_categorize(pokemon_team):
-    ## TODO: pokemon_team is a list of pokemon
-    ## TODO: feed each pokemon into type_categorize function
-    ## TODO: tally the resistances and weaknesses of team
-    ## TODO: display biggest resistances/weaknesses and all pokemon associated with each
-    weaknesses_dict = {key: [] for key in type_list} # key: pokemon, value: list of weaknesses
+    weaknesses_dict = {key: [] for key in type_list}
     resistances_dict = {key: [] for key in type_list}
     immunities_dict = {key: [] for key in type_list}
 
