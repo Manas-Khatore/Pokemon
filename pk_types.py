@@ -156,16 +156,12 @@ def team_categorize(pokemon_team):
     immunities_dict = {key: [] for key in type_list}
 
     for pok in pokemon_team:
-        if pok != '':
+        if pok is not None:
             dict_list = populate_dict(pok, weaknesses_dict, resistances_dict, immunities_dict)
             weaknesses_dict, resistances_dict, immunities_dict = dict_list[0], dict_list[1], dict_list[2]
-    
-    # print(resistances_dict)
 
     sorted_weaknesses = dict(sorted(weaknesses_dict.items(), key=lambda item: len(item[1]), reverse=True))
     sorted_resistances = dict(sorted(resistances_dict.items(), key=lambda item: len(item[1]), reverse=True))
     sorted_immunities = dict(sorted(immunities_dict.items(), key=lambda item: len(item[1]), reverse=True))
 
     return [sorted_weaknesses, sorted_resistances, sorted_immunities]
-        
-print(team_categorize(["Bulbasaur", "Charmander", "Squirtle"])[1])
