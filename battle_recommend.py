@@ -13,7 +13,6 @@ cur = conn.cursor()
 cur.execute("""SELECT * FROM pokemon_moves_full;""")
 col_names = [desc[0] for desc in cur.description]
 pokemon_moves_full = pd.DataFrame(cur.fetchall(), columns=col_names)
-print(pokemon_moves_full)
 
 def move_recommend(pokemon_team):
     team_weaknesses = pk_types.team_categorize(pokemon_team)[0]
@@ -36,4 +35,4 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
     return strong_moves_df[["pokemon_name", "move_name", "type"]]
 
 
-strong_moves(["Charizard", "Bulbasaur"], ["Bulbasaur"], "Bug")
+print(strong_moves(["Charizard", "Bulbasaur"], ["Bulbasaur"], "Bug"))
