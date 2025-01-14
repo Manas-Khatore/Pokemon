@@ -27,7 +27,6 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
     remaining_pokemon = list(set(pokemon_team) - set(weak_pokemon))
     pok_type_weaknesses = list(pk_types.Weakness_Graph.successors(pok_type))
     attacking_moves_df = pokemon_moves_full[pokemon_moves_full["category"] != "Status"]
-    print(remaining_pokemon)
     for pok in remaining_pokemon:
         pok_moves_df = attacking_moves_df[attacking_moves_df["pokemon_name"] == pok]
         pok_strong_moves_df = pok_moves_df[pok_moves_df["type"].isin(pok_type_weaknesses)].reset_index()
@@ -37,5 +36,3 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
     strong_moves_df["weakness"] = weak_type_col
     strong_moves_df = strong_moves_df.rename(columns={"type": "move_type"})
     return strong_moves_df[["pokemon_name", "move_name", "move_type", "weakness"]].drop_duplicates()
-
-print(strong_moves(["Bulbasaur", "Charizard", "Meganium"], ["Bulbasaur"], "Bug"))
