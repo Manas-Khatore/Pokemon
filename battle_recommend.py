@@ -12,6 +12,7 @@ conn = pg.connect(
 cur = conn.cursor()
 cur.execute("""SELECT * FROM pokemon_moves_full;""")
 pokemon_moves_full = pd.DataFrame(cur.fetchall())
+pokemon_moves_full.columns = cur.description
 print(pokemon_moves_full)
 
 def move_recommend(pokemon_team):
