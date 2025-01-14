@@ -31,7 +31,7 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
     for pok in remaining_pokemon:
         print(pok)
         pok_moves_df = attacking_moves_df[attacking_moves_df["pokemon_name"] == pok]
-        print(pok_moves_df)
+        print(pok_moves_df["type"].tolist().unique())
         pok_strong_moves_df = pok_moves_df[pok_moves_df["type"].isin(pok_type_weaknesses)]
         print(pok_strong_moves_df)
         strong_moves_df = pd.concat([strong_moves_df, pok_strong_moves_df], ignore_index=True)
