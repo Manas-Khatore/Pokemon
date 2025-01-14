@@ -38,7 +38,6 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
         print(pok_strong_moves_df)
         strong_moves_df = pd.concat([strong_moves_df, pok_strong_moves_df], ignore_index=True)
     
-    return strong_moves_df[["pokemon_name", "move_name", "type"]]
-
+    return strong_moves_df[["pokemon_name", "move_name", "type"]].drop_duplicates()
 
 print(strong_moves(["Charizard", "Meganium", "Bulbasaur"], ["Bulbasaur"], "Bug"))
