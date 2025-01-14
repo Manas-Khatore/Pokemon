@@ -18,9 +18,14 @@ def move_recommend(pokemon_team):
     team_weaknesses = pk_types.team_categorize(pokemon_team)[0]
     top_weaknesses = dict(islice(team_weaknesses.items(), 3))
     final_weaknesses = {k: v for k, v in top_weaknesses.items() if len(v) > 0}
+    move_recommend_df = pd.DataFrame()
 
     for pok_type in final_weaknesses:
         weak_pokemon = final_weaknesses[pok_type]
+        move_recommend_df = pd.concat([move_recommend_df, strong_moves(pokemon_team, weak_pokemon, pok_type)])
+
+    return move_recommend_df
+
 
 def strong_moves(pokemon_team, weak_pokemon, pok_type):
     strong_moves_df = pd.DataFrame()
@@ -36,3 +41,5 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
     strong_moves_df["weakness"] = weak_type_col
     strong_moves_df = strong_moves_df.rename(columns={"type": "move_type"})
     return strong_moves_df[["pokemon_name", "move_name", "move_type", "weakness"]].drop_duplicates()
+
+print(move_recommend(["Bulbasaur", "Meganium", "Blastoise", "Togekiss"]))
