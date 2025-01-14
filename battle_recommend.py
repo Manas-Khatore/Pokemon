@@ -40,4 +40,4 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
     weak_type_col = [pok_type for i in range(len(strong_moves_df))]
     strong_moves_df["weakness"] = weak_type_col
     strong_moves_df = strong_moves_df.rename(columns={"type": "move_type"})
-    return strong_moves_df[["pokemon_name", "move_name", "move_type", "weakness"]].drop_duplicates().reset_index()
+    return strong_moves_df[["pokemon_name", "move_name", "move_type", "weakness"]].drop_duplicates().reset_index(drop=True)
