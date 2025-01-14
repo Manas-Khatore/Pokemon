@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse
 import matplotlib.pyplot as plt
 import pandas as pd
 import pk_types
+import battle_recommend
 import io
 import os
 from itertools import islice
@@ -45,4 +46,16 @@ async def team_stats(pok1: str,
     return {"Top 3 Weaknesses": final_weaknesses, 
             "Top 3 Resistances": final_resistances, 
             "All Immunities": final_immunities}
-            
+
+@app.get("/newmoves", response_class=HTMLResponse)
+async def move_recommendations(pok1: str, 
+                          pok2: str | None = None,
+                          pok3: str | None = None,
+                          pok4: str | None = None,
+                          pok5: str | None = None,
+                          pok6: str | None = None):
+    
+    pok_team = [pok1, pok2, pok3, pok4, pok5, pok6]
+    pok_team = [pok for pok in pok_team if pok is not None]
+    move_recommend_df = battle_recommend.move_recommend(pok_team)
+    return move_recommend_df.to_html()
