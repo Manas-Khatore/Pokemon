@@ -24,6 +24,7 @@ def move_recommend(pokemon_team):
 def strong_moves(pokemon_team, weak_pokemon, pok_type):
     remaining_pokemon = list(set(pokemon_team) - set(weak_pokemon))
     pok_type_weaknesses = pk_types.Weakness_Graph.successors(pok_type)
-    print(pok_type_weaknesses)
+    for pok in pok_type_weaknesses:
+        print(pok)
 
-print(strong_moves([], [], "Grass"))
+strong_moves([], [], "Grass")
