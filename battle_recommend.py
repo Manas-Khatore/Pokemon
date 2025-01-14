@@ -29,15 +29,11 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
     attacking_moves_df = pokemon_moves_full[pokemon_moves_full["category"] != "Status"]
     print(remaining_pokemon)
     for pok in remaining_pokemon:
-        print(pok)
         pok_moves_df = attacking_moves_df[attacking_moves_df["pokemon_name"] == pok]
-        print(pok_moves_df["type"].unique().tolist())
-        # pok_strong_moves_df = pd.DataFrame()
-        print(pok_type_weaknesses)
         pok_strong_moves_df = pok_moves_df[pok_moves_df["type"].isin(pok_type_weaknesses)].reset_index()
-        print(pok_strong_moves_df)
         strong_moves_df = pd.concat([strong_moves_df, pok_strong_moves_df], ignore_index=True)
     
-    return strong_moves_df[["pokemon_name", "move_name", "type"]].drop_duplicates()
-
-print(strong_moves(["Charizard", "Meganium", "Bulbasaur"], ["Bulbasaur"], "Bug"))
+    weak_type_col = [pok_type for i in range(len(strong_moves_df))]
+    strong_moves_df["weakness"] = weak_type_col
+    strong_moves_df = strong_moves_df.rename(columns={"type": "move_type"})
+    return strong_moves_df[["pokemon_name", "move_name", "move_type", "weakness"]].drop_duplicates()
