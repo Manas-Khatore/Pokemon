@@ -40,4 +40,4 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
     return strong_moves_df[["pokemon_name", "move_name", "type"]]
 
 
-print(strong_moves(["Charizard", "Blastoise", "Bulbasaur"], ["Bulbasaur"], "Bug"))
+print(strong_moves(["Charizard", "Meganium", "Bulbasaur"], ["Bulbasaur"], "Bug"))
