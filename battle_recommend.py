@@ -25,7 +25,7 @@ def move_recommend(pokemon_team):
 def strong_moves(pokemon_team, weak_pokemon, pok_type):
     strong_moves_df = pd.DataFrame()
     remaining_pokemon = list(set(pokemon_team) - set(weak_pokemon))
-    pok_type_weaknesses = pk_types.Weakness_Graph.successors(pok_type)
+    pok_type_weaknesses = list(pk_types.Weakness_Graph.successors(pok_type))
     attacking_moves_df = pokemon_moves_full[pokemon_moves_full["category"] != "Status"]
     print(remaining_pokemon)
     for pok in remaining_pokemon:
