@@ -12,7 +12,7 @@ conn = pg.connect(
 cur = conn.cursor()
 cur.execute("""SELECT * FROM pokemon_moves_full;""")
 pokemon_moves_full = pd.DataFrame(cur.fetchall())
-print(pokemon_moves_full.columns)
+print(pokemon_moves_full)
 
 def move_recommend(pokemon_team):
     team_weaknesses = pk_types.team_categorize(pokemon_team)[0]
