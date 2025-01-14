@@ -22,9 +22,16 @@ def move_recommend(pokemon_team):
         weak_pokemon = final_weaknesses[pok_type]
 
 def strong_moves(pokemon_team, weak_pokemon, pok_type):
+    strong_moves_df = pd.DataFrame()
     remaining_pokemon = list(set(pokemon_team) - set(weak_pokemon))
     pok_type_weaknesses = pk_types.Weakness_Graph.successors(pok_type)
-    for pok in pok_type_weaknesses:
-        print(pok)
+    attacking_moves_df = pokemon_moves_full[pokemon_moves_full["category"] != "Status"]
+    for pok in remaining_pokemon:
+        pok_moves_df = attacking_moves_df[attacking_moves_df["pokemon_name"] == pok]
+        pok_strong_moves_df = pok_moves_df[pok_moves_df["type"].isin(pok_type_weaknesses)]
+        strong_moves_df = pd.concat([strong_moves_df, pok_strong_moves_df])
+    
+    return strong_moves_df[["pokemon_name", "move_name", "type"]]
+
 
 strong_moves([], [], "Grass")
