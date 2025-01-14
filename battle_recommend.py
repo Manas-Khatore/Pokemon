@@ -34,4 +34,4 @@ def strong_moves(pokemon_team, weak_pokemon, pok_type):
     return strong_moves_df[["pokemon_name", "move_name", "type"]]
 
 
-strong_moves([], [], "Grass")
+strong_moves(["Charizard", "Bulbasaur"], ["Bulbasaur"], "Bug")
